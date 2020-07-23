@@ -5,4 +5,10 @@ const getPlayers = async (req, res, next) => {
   console.log(players);
 };
 
-export { getPlayers };
+const getPlayerById = async (req, res, next) => {
+  const id = req.params.id;
+  const player = await Player.findById(id);
+  console.log(player);
+};
+
+export { getPlayers, getPlayerById };
