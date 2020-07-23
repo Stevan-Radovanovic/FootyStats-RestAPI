@@ -11,4 +11,14 @@ const getPlayerById = async (req, res, next) => {
   console.log(player);
 };
 
-export { getPlayers, getPlayerById };
+const createPlayer = async (req, res, next) => {
+  const player = await Player.create({
+    fullName: req.body.fullName,
+    number: req.body.number,
+    position: req.body.position,
+    dateOfBirth: req.body.dateOfBirth,
+  });
+  console.log(player);
+};
+
+export { getPlayers, getPlayerById, createPlayer };
