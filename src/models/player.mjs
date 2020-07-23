@@ -20,7 +20,7 @@ const Player = sequelize.define("player", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  dateOfBith: {
+  dateOfBirth: {
     type: Sequelize.DATE,
     allowNull: false,
   },
