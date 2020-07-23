@@ -1,6 +1,5 @@
 Player(*playerId*,fullName,dateOfBirth,number,position)
-Coach(*coachId*,fullName,dateOfBirth,position)
-Contract(*contractId*,startingDate,endingDate,weeklySalary)
+Contract(*contractId*,startingDate,endingDate,weeklySalary,$playerId$)
 ContractBonus(*contractId*,*bonusId*,description,amount)
-Game(*gameId*,opponentName,result)
+Game(*gameId*,opponentName,result,dateOfPlaying)
 Stats(*playerId*,*gameId*,goals,assists)
