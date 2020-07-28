@@ -29,7 +29,7 @@ const updatePlayer = async (req, res, next) => {
       position: req.body.position,
       dateOfBirth: req.body.dateOfBirth,
     },
-    { where: { playerId: req.params.id } }
+    { where: { id: req.params.id } }
   );
   console.log(result);
 };
