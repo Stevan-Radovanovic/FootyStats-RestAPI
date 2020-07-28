@@ -1,6 +1,10 @@
 import Express from "express";
 import sequelize from "./database/database.mjs";
+
 import playerRoutes from "./routes/player-routes.mjs";
+
+import Player from "./models/player-model.mjs";
+import Contract from "./models/contract-model.mjs";
 
 const app = Express();
 
@@ -9,11 +13,11 @@ app.use((err, req, res, next) => {
 });
 
 app.use("/players", playerRoutes);
+Contract.belongsTo(Player, { onDelete: "CASCADE" });
 
 sequelize
-  .sync()
+  .sync(/*{ force: true }*/)
   .then((res) => {
-    //console.log(res);
     app.listen(3000);
   })
   .catch((err) => console.log(err));

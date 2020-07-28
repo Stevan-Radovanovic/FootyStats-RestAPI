@@ -1,4 +1,4 @@
-import Player from "../models/player.mjs";
+import Player from "../models/player-model.mjs";
 
 const getPlayers = async (req, res, next) => {
   const result = await Player.findAll();

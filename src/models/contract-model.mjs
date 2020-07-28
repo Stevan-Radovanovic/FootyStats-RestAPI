@@ -1,29 +1,25 @@
 import Sequelize from "sequelize";
 import sequelize from "../database/database.mjs";
 
-const Player = sequelize.define("player", {
-  playerId: {
+const Contract = sequelize.define("contract", {
+  id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   },
-  fullName: {
-    type: Sequelize.STRING,
+  weeklySalary: {
+    type: Sequelize.REAL,
     allowNull: false,
   },
-  number: {
-    type: Sequelize.INTEGER,
+  startingDate: {
+    type: Sequelize.DATE,
     allowNull: false,
   },
-  position: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  dateOfBirth: {
+  endingDate: {
     type: Sequelize.DATE,
     allowNull: false,
   },
 });
 
-export default Player;
+export default Contract;
