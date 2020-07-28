@@ -1,8 +1,9 @@
 import Contract from "../models/contract-model.mjs";
 
+//Route Checking - Works
 const getContracts = async (req, res, next) => {
   const result = await Contract.findAll();
-  console.log(result);
+  res.json({ contracts: result });
 };
 
 const getContractById = async (req, res, next) => {

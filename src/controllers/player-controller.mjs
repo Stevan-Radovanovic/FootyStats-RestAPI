@@ -1,8 +1,9 @@
 import Player from "../models/player-model.mjs";
 
+//Route Checking - Works
 const getPlayers = async (req, res, next) => {
   const result = await Player.findAll();
-  console.log(result);
+  res.json({ players: result });
 };
 
 const getPlayerById = async (req, res, next) => {
@@ -11,6 +12,7 @@ const getPlayerById = async (req, res, next) => {
   console.log(result);
 };
 
+//Route Checking - Works
 const createPlayer = async (req, res, next) => {
   const result = await Player.create({
     fullName: req.body.fullName,
@@ -18,7 +20,7 @@ const createPlayer = async (req, res, next) => {
     position: req.body.position,
     dateOfBirth: req.body.dateOfBirth,
   });
-  console.log(result);
+  res.json({ message: "New player created", player: result });
 };
 
 const updatePlayer = async (req, res, next) => {
