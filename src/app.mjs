@@ -18,10 +18,13 @@ app.use((err, req, res, next) => {
 
 app.use("/players", playerRoutes);
 app.use("/contracts", contractRoutes);
-Contract.belongsTo(Player, { onDelete: "CASCADE" });
+Contract.belongsTo(Player, {
+  onDelete: "CASCADE",
+  foreignKey: { allowNull: false },
+});
 
 sequelize
-  .sync(/*{ force: true }*/)
+  .sync({ force: true })
   .then((res) => {
     app.listen(3000);
   })
