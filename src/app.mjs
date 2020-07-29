@@ -11,6 +11,8 @@ import Player from "./models/player-model.mjs";
 import Contract from "./models/contract-model.mjs";
 import Bonus from "./models/bonus-model.mjs";
 import Admin from "./models/admin-model.mjs";
+import Game from "./models/game-model.mjs";
+import Statistic from "./models/statistic-model.mjs";
 
 const app = Express();
 
@@ -38,6 +40,9 @@ Bonus.belongsTo(Contract, {
   onDelete: "CASCADE",
 });
 Contract.hasMany(Bonus);
+
+Player.belongsToMany(Game, { through: Statistic });
+Game.belongsToMany(Player, { through: Statistic });
 
 sequelize
   .sync(/*{ force: true }*/)
