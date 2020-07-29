@@ -42,6 +42,7 @@ Contract.hasMany(Bonus);
 sequelize
   .sync(/*{ force: true }*/)
   .then((res) => {
+    console.log("StatsDepo - Manchester City started...");
     app.listen(3000);
   })
   .catch((err) => console.log(err));
