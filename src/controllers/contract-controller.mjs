@@ -15,6 +15,16 @@ const getContractById = async (req, res, next) => {
 };
 
 //Route Checking - Works
+const getActiveContract = async (req, res, next) => {
+  const id = req.params.id;
+  const active = await Contract.max("startingDate");
+  const result = await Contract.findAll({
+    where: { startingDate: active, playerId: id },
+  });
+  res.json({ contract: result });
+};
+
+//Route Checking - Works
 const postContract = async (req, res, next) => {
   const result = await Contract.create({
     weeklySalary: req.body.weeklySalary,
@@ -61,6 +71,7 @@ export {
   getContracts,
   getContractById,
   getContractsByPlayerId,
+  getActiveContract,
   postContract,
   updateContract,
   deleteContract,
