@@ -51,9 +51,16 @@ const deleteContract = async (req, res, next) => {
   });
 };
 
+const getContractsByPlayerId = async (req, res, next) => {
+  const id = req.params.id;
+  const result = await Contract.findAll({ where: { playerId: id } });
+  res.json({ contract: result });
+};
+
 export {
   getContracts,
   getContractById,
+  getContractsByPlayerId,
   postContract,
   updateContract,
   deleteContract,
