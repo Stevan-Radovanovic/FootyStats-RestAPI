@@ -6,10 +6,11 @@ const getPlayers = async (req, res, next) => {
   res.json({ players: result });
 };
 
+//Route Checking - Works
 const getPlayerById = async (req, res, next) => {
   const id = req.params.id;
   const result = await Player.findByPk(id);
-  console.log(result);
+  res.json({ player: result });
 };
 
 //Route Checking - Works
@@ -23,6 +24,7 @@ const createPlayer = async (req, res, next) => {
   res.json({ message: "New player created", player: result });
 };
 
+//Route Checking - Works
 const updatePlayer = async (req, res, next) => {
   const result = await Player.update(
     {
@@ -33,13 +35,14 @@ const updatePlayer = async (req, res, next) => {
     },
     { where: { id: req.params.id } }
   );
-  console.log(result);
+  res.json({ message: "A player has been updated", playerId: result });
 };
 
+//Route Checking - Works
 const deletePlayer = async (req, res, next) => {
   const id = req.params.id;
-  const result = await Player.destroy({ where: { playerId: id } });
-  console.log(result);
+  const result = await Player.destroy({ where: { id: id } });
+  res.json({ message: "Player deleted", playerId: result });
 };
 
 export { getPlayers, getPlayerById, createPlayer, updatePlayer, deletePlayer };
