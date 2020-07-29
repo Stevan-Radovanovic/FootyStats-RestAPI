@@ -9,6 +9,7 @@ import bonusRoutes from "./routes/bonus-routes.mjs";
 import Player from "./models/player-model.mjs";
 import Contract from "./models/contract-model.mjs";
 import Bonus from "./models/bonus-model.mjs";
+import Admin from "./models/admin-model.mjs";
 
 const app = Express();
 
