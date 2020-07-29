@@ -5,6 +5,7 @@ import Body from "body-parser";
 import playerRoutes from "./routes/player-routes.mjs";
 import contractRoutes from "./routes/contract-routes.mjs";
 import bonusRoutes from "./routes/bonus-routes.mjs";
+import adminRoutes from "./routes/admin-routes.mjs";
 
 import Player from "./models/player-model.mjs";
 import Contract from "./models/contract-model.mjs";
@@ -22,6 +23,7 @@ app.use((err, req, res, next) => {
 app.use("/players", playerRoutes);
 app.use("/contracts", contractRoutes);
 app.use("/bonuses", bonusRoutes);
+app.use("/admins", adminRoutes);
 
 Contract.belongsTo(Player, {
   foreignKey: { allowNull: false },
