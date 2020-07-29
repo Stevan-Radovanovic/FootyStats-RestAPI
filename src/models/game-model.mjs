@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import sequelize from "../database/database.mjs";
 
-const Game = sequelize.define("contract", {
+const Game = sequelize.define("game", {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
