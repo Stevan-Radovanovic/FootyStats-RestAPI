@@ -14,6 +14,7 @@ const getContractById = async (req, res, next) => {
   res.json({ contract: result });
 };
 
+//Route Checking - Works
 const postContract = async (req, res, next) => {
   const result = await Contract.create({
     weeklySalary: req.body.weeklySalary,

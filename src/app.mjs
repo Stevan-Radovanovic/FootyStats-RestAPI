@@ -20,6 +20,8 @@ app.use("/players", playerRoutes);
 app.use("/contracts", contractRoutes);
 Contract.belongsTo(Player, {
   foreignKey: { allowNull: false },
+  onUpdate: "CASCADE",
+  onDelete: "CASCADE",
 });
 Player.hasMany(Contract);
 
