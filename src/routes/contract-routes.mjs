@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", controller.getContracts);
 router.get("/:id", controller.getContractById);
-router.post("/", controller.createContract);
+router.post("/", controller.postContract);
 router.put("/:id", controller.updateContract);
 router.delete("/:id", controller.deleteContract);
 

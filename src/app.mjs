@@ -13,18 +13,18 @@ const app = Express();
 app.use(Body.json());
 
 app.use((err, req, res, next) => {
-  console.log("This is an error request handler");
+  console.log(err);
 });
 
 app.use("/players", playerRoutes);
 app.use("/contracts", contractRoutes);
 Contract.belongsTo(Player, {
-  onDelete: "CASCADE",
   foreignKey: { allowNull: false },
 });
+Player.hasMany(Contract);
 
 sequelize
-  .sync({ force: true })
+  .sync(/*{ force: true }*/)
   .then((res) => {
     app.listen(3000);
   })
