@@ -6,6 +6,8 @@ import playerRoutes from "./routes/player-routes.mjs";
 import contractRoutes from "./routes/contract-routes.mjs";
 import bonusRoutes from "./routes/bonus-routes.mjs";
 import adminRoutes from "./routes/admin-routes.mjs";
+import gameRoutes from "./routes/game-routes.mjs";
+import statisticRoutes from "./routes/statistic-routes.mjs";
 
 import Player from "./models/player-model.mjs";
 import Contract from "./models/contract-model.mjs";
@@ -26,6 +28,8 @@ app.use("/players", playerRoutes);
 app.use("/contracts", contractRoutes);
 app.use("/bonuses", bonusRoutes);
 app.use("/admins", adminRoutes);
+app.use("/games", gameRoutes);
+app.use("/statistics", statisticRoutes);
 
 Contract.belongsTo(Player, {
   foreignKey: { allowNull: false },
