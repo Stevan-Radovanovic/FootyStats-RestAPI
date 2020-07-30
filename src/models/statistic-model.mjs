@@ -21,10 +21,20 @@ const Statistic = sequelize.define("statistic", {
   goals: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    validate: {
+      isDecimal: {
+        msg: "IsDecimal validation not passed for Goals",
+      },
+    },
   },
   assists: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    validate: {
+      isDecimal: {
+        msg: "IsDecimal validation not passed for Assists",
+      },
+    },
   },
 });
 
