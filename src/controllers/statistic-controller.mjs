@@ -54,7 +54,6 @@ const updateStatistic = async (req, res, next) => {
 const deleteStatistic = async (req, res, next) => {
   try {
     const id = req.params.id;
-    throw new Error("KURAJBER MASCURA");
     const result = await Statistic.destroy({ where: { id: id } });
     res.json({
       message: result === 0 ? "Statistic not deleted" : "Statistic deleted",

@@ -13,10 +13,20 @@ const Bonus = sequelize.define(
     description: {
       type: Sequelize.TEXT,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "NotEmpty validation not passed for Description",
+        },
+      },
     },
     amount: {
       type: Sequelize.REAL,
       allowNull: false,
+      validate: {
+        isDecimal: {
+          msg: "IsDecimal validation not passed for Amount",
+        },
+      },
     },
   },
   {
