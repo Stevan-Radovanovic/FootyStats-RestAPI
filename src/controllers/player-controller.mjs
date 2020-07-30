@@ -1,4 +1,5 @@
 import Player from "../models/player-model.mjs";
+import Contract from "../models/contract-model.mjs";
 
 const getPlayers = async (req, res, next) => {
   try {
@@ -9,10 +10,29 @@ const getPlayers = async (req, res, next) => {
   }
 };
 
+const getPlayersWithContracts = async (req, res, next) => {
+  try {
+    const result = await Player.findAll({ include: Contract });
+    res.json({ players: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
 const getPlayerById = async (req, res, next) => {
   try {
     const id = req.params.id;
     const result = await Player.findByPk(id);
+    res.json({ player: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+const getPlayerByIdWithContracts = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Player.findByPk(id, { include: Contract });
     res.json({ player: result });
   } catch (err) {
     next(new Error(err));
@@ -50,7 +70,6 @@ const updatePlayer = async (req, res, next) => {
   }
 };
 
-//Route Checking - Works
 const deletePlayer = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -61,4 +80,12 @@ const deletePlayer = async (req, res, next) => {
   }
 };
 
-export { getPlayers, getPlayerById, createPlayer, updatePlayer, deletePlayer };
+export {
+  getPlayers,
+  getPlayerById,
+  getPlayersWithContracts,
+  getPlayerByIdWithContracts,
+  createPlayer,
+  updatePlayer,
+  deletePlayer,
+};
