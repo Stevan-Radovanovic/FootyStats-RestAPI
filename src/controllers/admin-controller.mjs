@@ -41,7 +41,43 @@ const postAdmin = async (req, res, next) => {
   }
 };
 
-const deleteAdmin = async (req, res, next) => {
+const updateAdminById = async (req, res, next) => {
+  try {
+    const result = await Admin.update(
+      {
+        userName: req.body.userName,
+        password: req.body.password,
+      },
+      { where: { id: req.params.id } }
+    );
+    res.json({
+      message: result[0] === 0 ? "Admin not updated" : "Admin updated",
+      admin: result,
+    });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+const updateAdminByUserName = async (req, res, next) => {
+  try {
+    const result = await Admin.update(
+      {
+        userName: req.body.userName,
+        password: req.body.password,
+      },
+      { where: { userName: req.params.name } }
+    );
+    res.json({
+      message: result[0] === 0 ? "Admin not updated" : "Admin updated",
+      admin: result,
+    });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+const deleteAdminById = async (req, res, next) => {
   try {
     const id = req.params.id;
     const result = await Admin.destroy({ where: { id: id } });
@@ -54,4 +90,26 @@ const deleteAdmin = async (req, res, next) => {
   }
 };
 
-export { getAdmins, getAdminById, postAdmin, deleteAdmin, getAdminByUserName };
+const deleteAdminByUserName = async (req, res, next) => {
+  try {
+    const name = req.params.name;
+    const result = await Admin.destroy({ where: { userName: name } });
+    res.json({
+      message: result === 0 ? "Admin not deleted" : "Admin deleted",
+      result: result,
+    });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+export {
+  getAdmins,
+  getAdminById,
+  postAdmin,
+  deleteAdminById,
+  deleteAdminByUserName,
+  getAdminByUserName,
+  updateAdminByUserName,
+  updateAdminById,
+};
