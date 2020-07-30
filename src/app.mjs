@@ -21,7 +21,8 @@ const app = Express();
 app.use(Body.json());
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  console.log("An error has been thrown");
+  res.json({ error: err.message });
 });
 
 app.use("/players", playerRoutes);
