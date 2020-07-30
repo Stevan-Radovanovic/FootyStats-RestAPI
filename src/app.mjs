@@ -20,11 +20,6 @@ const app = Express();
 
 app.use(Body.json());
 
-app.use((err, req, res, next) => {
-  console.log("An error has been thrown");
-  res.json({ error: err.message });
-});
-
 app.use("/players", playerRoutes);
 app.use("/contracts", contractRoutes);
 app.use("/bonuses", bonusRoutes);
@@ -48,6 +43,11 @@ Contract.hasMany(Bonus);
 
 Player.belongsToMany(Game, { through: Statistic });
 Game.belongsToMany(Player, { through: Statistic });
+
+app.use((err, req, res, next) => {
+  console.log("An error has been thrown");
+  res.json({ error: err.message });
+});
 
 sequelize
   .sync(/*{ force: true }*/)
