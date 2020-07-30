@@ -9,6 +9,9 @@ import adminRoutes from "./routes/admin-routes.mjs";
 import gameRoutes from "./routes/game-routes.mjs";
 import statisticRoutes from "./routes/statistic-routes.mjs";
 
+import { allowMiddleware } from "./middleware/allow.mjs";
+import { errorMiddleware } from "./middleware/error.mjs";
+
 import Player from "./models/player-model.mjs";
 import Contract from "./models/contract-model.mjs";
 import Bonus from "./models/bonus-model.mjs";
@@ -20,18 +23,7 @@ const app = Express();
 
 app.use(Body.json());
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, PUT, OPTIONS"
-  );
-  next();
-});
+app.use(allowMiddleware);
 
 app.use("/players", playerRoutes);
 app.use("/contracts", contractRoutes);
@@ -57,10 +49,7 @@ Contract.hasMany(Bonus);
 Player.belongsToMany(Game, { through: Statistic });
 Game.belongsToMany(Player, { through: Statistic });
 
-app.use((err, req, res, next) => {
-  console.log("An error has been thrown");
-  res.json({ error: err.message });
-});
+app.use(errorMiddleware);
 
 sequelize
   .sync(/*{ force: true }*/)
