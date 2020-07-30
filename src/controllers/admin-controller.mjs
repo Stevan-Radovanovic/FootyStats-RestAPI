@@ -1,4 +1,6 @@
 import Admin from "../models/admin-model.mjs";
+import Jwt from "jsonwebtoken";
+import Bcrypt from "bcrypt";
 
 const getAdmins = async (req, res, next) => {
   try {
@@ -31,9 +33,10 @@ const getAdminByUserName = async (req, res, next) => {
 
 const postAdmin = async (req, res, next) => {
   try {
+    const hash = await Bcrypt.hash(req.body.password, 10);
     const result = await Admin.create({
       userName: req.body.userName,
-      password: req.body.password,
+      password: hash,
     });
     res.json({ message: "New admin created", admin: result });
   } catch (err) {
@@ -103,6 +106,37 @@ const deleteAdminByUserName = async (req, res, next) => {
   }
 };
 
+const logIn = async (req, res, next) => {
+  try {
+    const name = req.params.name;
+    const fetchedUser = await Admin.findAll({ where: { userName: name } });
+    console.log(fetchedUser);
+    if (!fetchedUser) {
+      throw new Error("User not found");
+    }
+    const compareResult = await Bcrypt.compare(
+      req.body.password,
+      fetchedUser[0].dataValues.password
+    );
+    if (!compareResult) {
+      throw new Error("Invalid User");
+    }
+    const token = Jwt.sign(
+      {
+        userName: fetchedUser[0].dataValues.userName,
+        id: fetchedUser[0].dataValues.id,
+      },
+      "secret",
+      {
+        expiresIn: "1h",
+      }
+    );
+    res.json({ token: token });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
 export {
   getAdmins,
   getAdminById,
@@ -112,4 +146,5 @@ export {
   getAdminByUserName,
   updateAdminByUserName,
   updateAdminById,
+  logIn,
 };
