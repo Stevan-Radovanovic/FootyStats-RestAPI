@@ -29,6 +29,16 @@ const getGameById = async (req, res, next) => {
   }
 };
 
+const getGameByIdDetailed = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Game.findByPk(id, { include: Player });
+    res.json({ game: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
 const postGame = async (req, res, next) => {
   try {
     const result = await Game.create({
@@ -78,6 +88,7 @@ export {
   getGames,
   getGamesDetailed,
   getGameById,
+  getGameByIdDetailed,
   postGame,
   updateGame,
   deleteGame,
