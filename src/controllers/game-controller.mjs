@@ -1,8 +1,18 @@
 import Game from "../models/game-model.mjs";
+import Player from "../models/player-model.mjs";
 
 const getGames = async (req, res, next) => {
   try {
     const result = await Game.findAll();
+    res.json({ games: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+const getGamesDetailed = async (req, res, next) => {
+  try {
+    const result = await Game.findAll({ include: Player });
     res.json({ games: result });
   } catch (err) {
     next(new Error(err));
@@ -64,4 +74,11 @@ const deleteGame = async (req, res, next) => {
   }
 };
 
-export { getGames, getGameById, postGame, updateGame, deleteGame };
+export {
+  getGames,
+  getGamesDetailed,
+  getGameById,
+  postGame,
+  updateGame,
+  deleteGame,
+};
