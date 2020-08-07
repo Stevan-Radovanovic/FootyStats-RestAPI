@@ -4,10 +4,10 @@ import { authMiddleware } from "../middleware/authorization.mjs";
 const router = express.Router();
 
 router.get("/", controller.getPlayers);
-router.get("/detail", authMiddleware, controller.getPlayersWithContracts);
+router.get("/detail", controller.getPlayersWithContracts);
 router.get("/detail/:id", controller.getPlayerByIdWithContracts);
-router.post("/", authMiddleware, controller.createPlayer);
-router.put("/:id", authMiddleware, controller.updatePlayer);
-router.delete("/:id", authMiddleware, controller.deletePlayer);
+router.post("/", controller.createPlayer);
+router.put("/:id", controller.updatePlayer);
+router.delete("/:id", controller.deletePlayer);
 
 export default router;
