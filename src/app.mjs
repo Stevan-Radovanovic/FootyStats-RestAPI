@@ -54,7 +54,7 @@ app.use(errorMiddleware);
 sequelize
   .sync(/*{ force: true }*/)
   .then((res) => {
-    console.log("StatsDepo - Manchester City started...");
+    console.log("FootyStats started...");
     app.listen(3000);
   })
   .catch((err) => console.log(err));
