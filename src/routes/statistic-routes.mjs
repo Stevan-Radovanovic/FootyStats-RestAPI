@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get("/", controller.getStatistics);
 router.get("/:id", controller.getStatisticById);
-router.post("/", authMiddleware, controller.postStatistic);
-router.put("/:pid&:gid", authMiddleware, controller.updateStatistic);
-router.delete("/:id", authMiddleware, controller.deleteStatistic);
+router.post("/", controller.postStatistic);
+router.put("/:pid&:gid", controller.updateStatistic);
+router.delete("/:id", controller.deleteStatistic);
 
 export default router;

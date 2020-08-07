@@ -3,11 +3,11 @@ import * as controller from "../controllers/contract-controller.mjs";
 import { authMiddleware } from "../middleware/authorization.mjs";
 const router = express.Router();
 
-router.get("/", authMiddleware, controller.getContracts);
-router.get("/detail", authMiddleware, controller.getContractsWithPlayer);
-router.get("/bonus", authMiddleware, controller.getContractsWithBonuses);
-router.get("/:id", authMiddleware, controller.getContractById);
-router.get("/detail/:id", authMiddleware, controller.getContractByIdWithPlayer);
+router.get("/", controller.getContracts);
+router.get("/detail", controller.getContractsWithPlayer);
+router.get("/bonus", controller.getContractsWithBonuses);
+router.get("/:id", controller.getContractById);
+router.get("/detail/:id", controller.getContractByIdWithPlayer);
 router.get(
   "/bonuses/:id",
   authMiddleware,
@@ -18,7 +18,7 @@ router.get(
   authMiddleware,
   controller.getContractsByPlayerId
 );
-router.get("/player-active/:id", authMiddleware, controller.getActiveContract);
+router.get("/player-active/:id", controller.getActiveContract);
 router.get(
   "/player-active/detail/:id",
   authMiddleware,
@@ -29,8 +29,8 @@ router.get(
   authMiddleware,
   controller.getActiveContractWithBonuses
 );
-router.post("/", authMiddleware, controller.postContract);
-router.put("/:id", authMiddleware, controller.updateContract);
-router.delete("/:id", authMiddleware, controller.deleteContract);
+router.post("/", controller.postContract);
+router.put("/:id", controller.updateContract);
+router.delete("/:id", controller.deleteContract);
 
 export default router;

@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get("/", controller.getBonuses);
 router.get("/:id", controller.getBonusById);
-router.post("/", authMiddleware, controller.postBonus);
-router.put("/:id", authMiddleware, controller.updateBonus);
-router.delete("/:id", authMiddleware, controller.deleteBonus);
+router.post("/", controller.postBonus);
+router.put("/:id", controller.updateBonus);
+router.delete("/:id", controller.deleteBonus);
 
 export default router;
