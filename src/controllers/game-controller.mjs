@@ -39,6 +39,18 @@ const getGameByIdDetailed = async (req, res, next) => {
   }
 };
 
+const getGameStatsById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Game.findAll({
+      include: Player,
+    });
+    res.json({ stats: result[0].players });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
 const postGame = async (req, res, next) => {
   try {
     const result = await Game.create({
@@ -89,6 +101,7 @@ export {
   getGamesDetailed,
   getGameById,
   getGameByIdDetailed,
+  getGameStatsById,
   postGame,
   updateGame,
   deleteGame,
