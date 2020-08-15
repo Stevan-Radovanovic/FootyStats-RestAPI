@@ -1,5 +1,6 @@
 import Player from "../models/player-model.mjs";
 import Contract from "../models/contract-model.mjs";
+import Game from "../models/game-model.mjs";
 
 const getPlayers = async (req, res, next) => {
   try {
@@ -24,6 +25,18 @@ const getPlayerById = async (req, res, next) => {
     const id = req.params.id;
     const result = await Player.findByPk(id);
     res.json({ player: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+const getPlayerStatsById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Player.findAll({
+      include: Game,
+    });
+    res.json({ stats: result[0].games });
   } catch (err) {
     next(new Error(err));
   }
@@ -88,4 +101,5 @@ export {
   createPlayer,
   updatePlayer,
   deletePlayer,
+  getPlayerStatsById,
 };

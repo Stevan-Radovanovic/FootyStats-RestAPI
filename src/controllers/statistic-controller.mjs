@@ -1,6 +1,4 @@
 import Statistic from "../models/statistic-model.mjs";
-import Player from "../models/player-model.mjs";
-import Game from "../models/game-model.mjs";
 
 const getStatistics = async (req, res, next) => {
   try {

@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/", controller.getPlayers);
 router.get("/detail", controller.getPlayersWithContracts);
 router.get("/detail/:id", controller.getPlayerByIdWithContracts);
+router.get("/stats/:id", controller.getPlayerStatsById);
 router.post("/", controller.createPlayer);
 router.put("/:id", controller.updatePlayer);
 router.delete("/:id", controller.deletePlayer);
