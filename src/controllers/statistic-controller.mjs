@@ -1,4 +1,6 @@
 import Statistic from "../models/statistic-model.mjs";
+import Player from "../models/player-model.mjs";
+import Game from "../models/game-model.mjs";
 
 const getStatistics = async (req, res, next) => {
   try {
@@ -64,10 +66,36 @@ const deleteStatistic = async (req, res, next) => {
   }
 };
 
+const getStatisticsByPlayerId = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Statistic.findAll({
+      where: { playerId: id },
+    });
+    res.json({ stats: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+const getStatisticsByGameId = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Statistic.findAll({
+      where: { gameId: id },
+    });
+    res.json({ stats: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
 export {
   getStatistics,
   getStatisticById,
   postStatistic,
   updateStatistic,
   deleteStatistic,
+  getStatisticsByPlayerId,
+  getStatisticsByGameId,
 };

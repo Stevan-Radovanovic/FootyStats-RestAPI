@@ -8,5 +8,7 @@ router.get("/:id", controller.getStatisticById);
 router.post("/", controller.postStatistic);
 router.put("/:pid&:gid", controller.updateStatistic);
 router.delete("/:id", controller.deleteStatistic);
+router.get("/player-stats/:id", controller.getStatisticsByPlayerId);
+router.get("/game-stats/:id", controller.getStatisticsByGameId);
 
 export default router;
