@@ -35,6 +35,7 @@ const getPlayerStatsById = async (req, res, next) => {
     const id = req.params.id;
     const result = await Player.findAll({
       include: Game,
+      where: { id: id },
     });
     res.json({ stats: result[0].games });
   } catch (err) {
