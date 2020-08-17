@@ -54,7 +54,9 @@ const updateStatistic = async (req, res, next) => {
 const deleteStatistic = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const result = await Statistic.destroy({ where: { id: id } });
+    const result = await Statistic.destroy({
+      where: { playerId: req.params.pid, gameId: req.params.gid },
+    });
     res.json({
       message: result === 0 ? "Statistic not deleted" : "Statistic deleted",
       result: result,
