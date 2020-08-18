@@ -108,10 +108,10 @@ const deleteAdminByUserName = async (req, res, next) => {
 
 const logIn = async (req, res, next) => {
   try {
-    const name = req.params.name;
+    const name = req.body.name;
     const fetchedUser = await Admin.findAll({ where: { userName: name } });
-    console.log(fetchedUser);
-    if (!fetchedUser) {
+
+    if (!fetchedUser[0]) {
       throw new Error("User not found");
     }
     const compareResult = await Bcrypt.compare(

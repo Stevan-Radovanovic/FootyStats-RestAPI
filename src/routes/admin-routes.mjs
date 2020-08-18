@@ -4,7 +4,7 @@ import { authMiddleware } from "../middleware/authorization.mjs";
 
 const router = express.Router();
 
-router.get("/login/:name", controller.logIn);
+router.post("/login", controller.logIn);
 
 router.get("/", controller.getAdmins);
 router.get("/:id", controller.getAdminById);
