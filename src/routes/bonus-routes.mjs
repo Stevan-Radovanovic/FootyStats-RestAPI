@@ -8,5 +8,6 @@ router.get("/:id", controller.getBonusById);
 router.post("/", controller.postBonus);
 router.put("/:id", controller.updateBonus);
 router.delete("/:id", controller.deleteBonus);
+router.get("/contract/:id", controller.getBonusesByContractId);
 
 export default router;

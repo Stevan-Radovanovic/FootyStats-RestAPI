@@ -63,4 +63,21 @@ const deleteBonus = async (req, res, next) => {
   }
 };
 
-export { getBonuses, getBonusById, postBonus, updateBonus, deleteBonus };
+const getBonusesByContractId = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Bonus.findAll({ where: { contractId: id } });
+    res.json({ bonus: result });
+  } catch (err) {
+    next(new Error(err));
+  }
+};
+
+export {
+  getBonuses,
+  getBonusById,
+  postBonus,
+  updateBonus,
+  deleteBonus,
+  getBonusesByContractId,
+};
